@@ -7,7 +7,7 @@
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
                   <div class=" d-none d-md-inline-block"><span>
-                  <h1>வானவில்</h1>  <!-- <img src="<?php echo base_url('/newswoods/images/bannerlogo.jpg')?>" width="160" heigth="29.24"></img> -->
+                  <h1>Grocery</h1>  <!-- <img src="<?php echo base_url('/newswoods/images/bannerlogo.jpg')?>" width="160" heigth="29.24"></img> -->
                   </span> </span><strong class="text-primary">Dashboard</strong></div></a></div>
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                 <!-- Notifications dropdown-->
