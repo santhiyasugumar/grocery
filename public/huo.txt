@@ -1,0 +1,1 @@
+http://localhost/news/newspaper/News/getAllData?search=golobujamun%20test%202&offset=0&limit=10

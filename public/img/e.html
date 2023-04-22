@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>School</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <!-- theme stylesheet-->
+    <!-- <link rel="stylesheet" href="css/style.blue.css" id="theme-stylesheet"> -->
+    <link rel="stylesheet" href="css/custom_bs.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link href="vendor/bootstrap/css/boostrap-table.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/select-theme.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/select2.css" rel="stylesheet">
+    <style>
+      nav.navbar {
+        background: #2b90d9;
+        padding: .8rem 0;
+      }
+      .selection {
+        width:100%;
+      }
+      /* body,html{
+        height:100%;
+        overflow-y: hidden;
+      } */
+
+    </style>
+  </head>
+  <body>
+  <div class="container h-100" id="preloader">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="sk-three-bounce">
+        <h1>Loading...</h1>
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>  
+  </div> <!-- Side Navbar -->
+ <nav class="side-navbar menu" style="display:none">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+          <!-- User Info-->
+          <div class="sidenav-header-inner text-center"><img src="img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
+            <h2 class="h5">Admin</h2><span>Web Developer</span>
+          </div>
+          <!-- Small Brand information, appears on minimized sidebar-->
+          <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+          <h5 class="sidenav-heading">Main</h5>
+          <ul id="side-main-menu" class="side-menu list-unstyled">                  
+            <li id="menuClass"><a href="/Class_section"> <i class="icon-form"></i>Add Class-Section</a></li>
+            <li id="menuSubject"><a href="/subject"> <i class="fa fa-bar-chart"></i>Add Subject</a></li>
+            <li id="menuExam"><a href="/exam"> <i class="icon-grid"></i>Add Exam</a></li>
+            <li id="menuStudent"><a href="/student"> <i class="icon-grid"></i>Add Student</a></li>
+            <li id="menuStaff"><a href="/staff"> <i class="icon-grid"></i>Add Staff</a></li>
+            <li id="menuApple"><a href="/apple"> <i class="icon-grid"></i>Apple</a></li>
+            <li><a href="#cofigdropdownDropdown" aria-expanded="false" data-toggle="collapse"  id="cofigdropdownDropdownid"> <i class="icon-interface-windows"></i>Config </a>
+              <ul id="cofigdropdownDropdown" class="collapse list-unstyled ">
+                <li id="menuConfigClassSubject"><a href="/Config_class_subject">Class-Subject</a></li>
+               
+              </ul>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </nav><div class="page menu" style="display:none">
+
+      <!-- navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+                  <div class="brand-text d-none d-md-inline-block"><span>School </span><strong class="text-primary">Dashboard</strong></div></a></div>
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <!-- Notifications dropdown-->
+                <!-- <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
+                  <ul aria-labelledby="notifications" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-envelope"></i>You have 6 new messages </div>
+                          <div class="notification-time"><small>4 minutes ago</small></div>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-twitter"></i>You have 2 followers</div>
+                          <div class="notification-time"><small>4 minutes ago</small></div>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-upload"></i>Server Rebooted</div>
+                          <div class="notification-time"><small>4 minutes ago</small></div>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-twitter"></i>You have 2 followers</div>
+                          <div class="notification-time"><small>10 minutes ago</small></div>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-bell"></i>view all notifications                                            </strong></a></li>
+                  </ul>
+                </li> -->
+                <!-- Messages dropdown-->
+                <!-- <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope"></i><span class="badge badge-info">10</span></a>
+                  <ul aria-labelledby="notifications" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
+                        <div class="msg-profile"> <img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="msg-body">
+                          <h3 class="h5">Jason Doe</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2014</small>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
+                        <div class="msg-profile"> <img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="msg-body">
+                          <h3 class="h5">Frank Williams</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2014</small>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
+                        <div class="msg-profile"> <img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="msg-body">
+                          <h3 class="h5">Ashley Wood</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm - 10.06.2014</small>
+                        </div></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-envelope"></i>Read all messages    </strong></a></li>
+                  </ul>
+                </li> -->
+                <!-- Languages dropdown    -->
+                <!-- <li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
+                  <ul aria-labelledby="languages" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/DE.png" alt="English" class="mr-2"><span>German</span></a></li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="English" class="mr-2"><span>French                                                         </span></a></li>
+                  </ul>
+                </li> -->
+                <!-- Log out-->
+                <li class="nav-item"><a href="/Login" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+<!-- Breadcrumb-->
+<div class="breadcrumb-holder">
+   <div class="container-fluid">
+      <ul class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+         <li class="breadcrumb-item active">Forms       </li>
+      </ul>
+   </div>
+</div>
+<section class="forms">
+   <div class="m-3">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="card">
+               <div class="card-header">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <h4>Subject Details</h4>
+                     </div>
+                     <div class="col-md-6 text-right">
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal">Add Subject</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-body">
+                <!-- //table -->
+                <table class="table table-sm"
+                  id="table"
+                  data-toggle="table"
+                  data-height="460"
+                  data-search="true"
+                  data-pagination="true"
+                  data-side-pagination="server"
+                  data-query-params="queryParams"
+                  data-url="Subject/getAllData">
+                  <thead>
+                     <tr>
+                        <th data-field="subject_id">ID</th>
+                        <th data-field="subject_name">Subject Name</th>
+                        <th data-field="action" data-align="center" data-formatter="btnActionFormatter" data-events="btnActionEvent">Action</th>
+                     </tr>
+                  </thead>
+               </table>
+               </div>
+               <!-- Modal Add Subject-->
+               <form action="#" method="post" id="form_save" name="form_save" enctype="multipart/form-data" class="form-validate">
+                  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add New Subject</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <div class="form-group">
+                                 <label>Subject Name</label>
+                                 <input type="text" class="form-control" name="subject_name" placeholder="Subject Name">
+                              </div>
+                             
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Save</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+               <!-- End Modal Add Subject-->
+               <!-- Modal Edit Subject-->
+               <form action="#" method="post" id="form_update" name="form_update" enctype="multipart/form-data" class="form-validate">
+                  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Subject</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <div class="form-group">
+                                 <label>Subject Name</label>
+                                 <input type="text" class="form-control subject_name" name="subject_name" placeholder="Subject Name">
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                              <input type="text" name="subject_id" class="subject_id">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Update</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+               <!-- End Modal Edit Subject-->
+               <!-- Modal Delete Subject-->
+               <form action="#" method="post" id="form_delete" name="form_delete">
+                  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Delete Subject</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <h4>Are you sure want to delete this Subject?</h4>
+                           </div>
+                           <div class="modal-footer">
+                              <input type="text" name="subject_id" class="subject_id">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                              <button type="submit" class="btn btn-primary">Yes</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+               <!-- End Modal Delete Subject-->
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+</section>
+</div>
+<!-- JavaScript files-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- Main File-->
+<script src="js/front.js"></script>
+<script src="vendor/bootstrap/js/bootstrap-table.js"></script>
+<script src="vendor/bootstrap/js/select2.js"></script>
+<!-- select2 -->
+<!-- <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script> -->
+<script>
+    function showPreloader() {
+        $("#preloader").show();
+        $(".menu").hide();
+    }
+
+    function hidePreloader() {
+        $("#preloader").hide();
+        $(".menu").show();
+    }
+</script><script>
+   $(document).ready(function(){
+      hidePreloader();
+   })
+
+   function queryParams(params) {
+    return params
+  }
+
+  function btnActionFormatter(value, row, index) {
+      return [
+         '<button class="btn btn-sm btn-info btnedit mr-2" type="button"><i class="fa fa-edit"></i> Edit</button>',
+         '<button class="btn btn-sm btn-danger btnDelete" type="button"><i class="fa fa-trash"></i> Delete</button>',
+      ].join('')
+   }
+
+   window.btnActionEvent = {
+      'click .btnedit': function (e, value, row, index) {
+         $('.subject_id').val(row['subject_id']);
+         $('.subject_name').val(row['subject_name']);
+         $('#editModal').modal('show'); // show edit modal
+      },
+      'click .btnDelete': function (e, value, row, index) {
+         $('.subject_id').val(row['subject_id']);
+         $('#deleteModal').modal('show');  // Call delete modal 
+      }
+   }
+
+   $('#addModal').on('shown.bs.modal', function (e) {
+      $('#form_save')[0].reset();
+      $("#form_save").validate().resetForm();
+   })
+
+  $("#form_save").on('submit',function(e)
+  {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    if($("#form_save").validate().form()){
+        path = '/Subject/save';
+        var form = $('#form_save');
+        var formData = new FormData(form[0]);
+        $.ajax({
+          type: "POST",
+          url: path,
+          data: formData,
+          beforeSend: function() {
+            $('#addModal').modal('hide');
+            showPreloader();
+          },
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
+          success: function(data)
+          { 
+            if(data.messages.success == "Data Saved") {
+               refreshTable();
+               alert("Data Inserted Successfully");
+               hidePreloader();
+            } 
+          },
+          error: function (jqXHR, textStatus, errorMessage, exception) {
+            console.log(errorMessage);
+          }
+        });
+      }
+  });
+
+  $("#form_update").on('submit',function(e)
+  {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    if($("#form_update").validate().form()){
+        path = '/Subject/update';
+        var form = $('#form_update');
+        var formData = new FormData(form[0]);
+        $.ajax({
+          type: "POST",
+          url: path,
+          data: formData,
+          beforeSend: function() {
+            showPreloader();
+            $('#editModal').modal('hide');
+          },
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
+          success: function(data)
+          {
+            if(data.messages.success == "Data Updated") {
+               alert("Data Updated Successfully");
+               refreshTable();
+               $('#form_update')[0].reset();
+               $("#form_update").validate().resetForm();
+               hidePreloader();
+            } else {
+               $('#editModal').modal('show');
+            }
+          },
+          error: function (jqXHR, textStatus, errorMessage, exception) {
+            console.log(errorMessage);
+          }
+        });
+      }
+  });
+
+  $("#form_delete").on('submit',function(e)
+  {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    if($("#form_delete").validate().form()){
+        path = '/Subject/delete';
+        var form = $('#form_delete');
+        var formData = new FormData(form[0]);
+        $.ajax({
+          type: "POST",
+          url: path,
+          data: formData,
+          beforeSend: function() {
+            showPreloader();
+            $('#deleteModal').modal('hide');
+          },
+          contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+          processData: false, // NEEDED, DON'T OMIT THIS
+          success: function(data)
+          {
+            if(data.messages.success == "Data Deleted") {
+               alert("Data Deleted Successfully");
+               refreshTable();
+               hidePreloader();
+            } else {
+               $('#deleteModal').modal('show');
+            }
+          },
+          error: function (jqXHR, textStatus, errorMessage, exception) {
+            console.log(errorMessage);
+          }
+        });
+      }
+  });
+
+  function refreshTable() {
+   $('#table').bootstrapTable('refreshOptions', {
+      pageNumber: 1
+   });
+  }
+
+
+</script>
+</body>
+</html>

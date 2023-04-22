@@ -1,0 +1,5 @@
+SELECT * FROM news AS news 
+            WHERE category_id = 3 AND
+            established_date <= NOW() AND 
+            ((content LIKE '%%') OR (cover_title LIKE '%%') )
+            ORDER BY created_on DESC LIMIT 5 OFFSET 0
