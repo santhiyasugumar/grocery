@@ -17,6 +17,7 @@ class Product extends Controller {
 
     public function getAllData() {
         helper(['form', 'url']);
+      
         $db = \Config\Database::connect();
         $model=new News_model();
         $model_category = new Category_model();
@@ -26,25 +27,29 @@ class Product extends Controller {
         $limit = $paginationJson['limit'];
         $offset = $paginationJson['offset'];
         $search = $paginationJson['search'];
+        $sea = "";
+        if(!isset($search)) {
+            $sea = "AND (news.cover_title LIKE '%$search%') OR (cat.category_name LIKE '%$search%')";
+        }
 
         $sql = "SELECT news.*,GROUP_CONCAT(news.category_id) as category_id_group,cat.category_name as category_name,GROUP_CONCAT(cat.category_name) as category_name, DATE_FORMAT(news.created_on, '%d/%m/%Y') as created_on FROM news AS news 
         LEFT JOIN category AS cat ON cat.category_id = news.category_id
         WHERE 
-        news.established_date <= NOW() AND 
-        (news.cover_title LIKE '%$search%') OR (cat.category_name LIKE '%$search%')
+        news.established_date <= NOW() $sea 
         GROUP BY news.grpid ORDER BY news.created_on DESC";
+        echo ($sql);
+        exit;
         $query = $db->query($sql);
         $count = $query->getResultArray(); 
-
+       
         $sql = "SELECT news.*,GROUP_CONCAT(news.category_id) as category_id_group,cat.category_name as category_name,GROUP_CONCAT(cat.category_name) as category_name, DATE_FORMAT(news.created_on, '%d/%m/%Y') as created_on FROM news AS news 
         LEFT JOIN category AS cat ON cat.category_id = news.category_id
         WHERE 
-        news.established_date <= NOW() AND 
-        (news.cover_title LIKE '%$search%') OR (cat.category_name LIKE '%$search%') 
+        news.established_date <= NOW() $sea 
         GROUP BY news.grpid ORDER BY news.created_on DESC LIMIT $limit OFFSET $offset";
         $query = $db->query($sql);
         $data = $query->getResultArray(); 
-        
+       
         echo json_encode(array(
             "name" => "result",
             "total" => (int)count($count),

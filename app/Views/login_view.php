@@ -66,7 +66,7 @@
             success: function(data)
             { 
               if(data == "success") {
-                window.location.href = "<?php echo base_url('/order')?>";
+                window.location.href = "<?php echo base_url('/category')?>";
               } else {
                 hidePreloader();
                 alert("Invalid Username/Password");

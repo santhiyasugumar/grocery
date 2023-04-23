@@ -33,8 +33,10 @@ $routes->set404Override();
 $routes->post('/getLoginDetails', 'Login::getLoginDetails');
 
 $routes->post('/category/getAllData', 'Category::getAllData');
-$routes->get('/product/getData_drp', 'Product::getAllData');
-
+$routes->post('/category/save', 'Category::save');
+$routes->post('/category/update', 'Category::update');
+$routes->get('/product/getData_drp', 'Product::getData_drp');
+$routes->post('/product/getAllData', 'Product::getAllData');
 
 $routes->resource('amirthamcinema');
 $routes->resource('login');
@@ -42,6 +44,7 @@ $routes->resource('news');
 $routes->resource('category');
 $routes->resource('order');
 $routes->resource('product');
+$routes->resource('homeG');
 
 
 

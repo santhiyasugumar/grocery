@@ -35,7 +35,7 @@
                         data-side-pagination="server"
                         data-query-params="queryParams" 
                         data-method="post"
-                        data-url = "<?php echo base_url('/News/getAllData')?>"
+                        data-url = "<?php echo base_url('/product/getAllData')?>"
                         >
                         <thead>
                            <tr>
@@ -43,7 +43,7 @@
                               <th data-field="grpid" data-visible="false">grpID</th>
                               <th data-field="created_on" data-sortable="true">Created on</th>
                               <th data-field="category_name" data-sortable="true"  data-width="100px">Category Name</th>
-                              <th data-field="cover_title" data-sortable="true" data-width="400px">Cover Title</th>
+                              <th data-field="cover_title" data-sortable="true" data-width="400px">Product Name</th>
                               <th data-field="status" data-visible="false">status</th>
                               <th class="action-table" data-field="action" data-align="center" data-formatter="btnAction" data-events="btnActionEvent">Action</th>
                            </tr>
@@ -74,12 +74,12 @@
                               <div class="row">
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label id="lblcovertitle">Enter Cover Title</label>
-                                       <textarea class="form-control" id="covertitle" name="covertitle" placeholder="Enter Cover Title/Video Link" ></textarea>
+                                       <label id="lblcovertitle">Enter Product Name</label>
+                                       <textarea class="form-control" id="covertitle" name="covertitle" placeholder="Enter Product Name/Video Link" ></textarea>
                                     </div>
                                  </div>
                               </div>
-                              <div class="row">
+                              <div class="row d-none">
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label>Enter Content</label>
@@ -98,13 +98,13 @@
                                        <label class="form-check-label" for="inlineRadio2">Private</label>
                                     </div>
                                  </div>
-                                 <div class="col-md-3">
+                                 <!-- <div class="col-md-3">
                                     <div class="form-group">
                                        <label for="exampleInputEmail1">Establish Date</label>
                                        <input type="text" class="form-control form-control-sm  datetimepicker-input" id="txtDateOfSample" data-toggle="datetimepicker" data-target="#txtDateOfSample" placeholder="DD/MM/YYYY HH:MM" tabindex="3" name="txtDateOfSample" /> 
                                        <small id="emailHelp" class="form-text text-muted">Date Format: DD/MM/YYYY HH:MM</small>
                                     </div>
-                                 </div>
+                                 </div> -->
                                  <div class="col-md-6 text-right">
                                     <button type="button" class="btn btn-secondary"  id="reset" data-dismiss="modal">Reset</button>
                                     <button type="submit" class="btn btn-primary" id="btnsave">Save</button>
@@ -167,6 +167,7 @@
          success: function(data,status)
          {
             var drp_data = JSON.parse(data);  
+            console.log(drp_data);
             $(".drpCategory").select2({
                data: drp_data['DATA_CATEGORY'],
                placeholder: "Select Category",
@@ -208,7 +209,7 @@
    });
    
    function clearData() {
-      $(".drpCategory").select2("val","0");
+      // $(".drpCategory").select2("val","0");
       $("#covertitle").val('');
       newscontent.setData('');
       $('#file').val('');
@@ -553,7 +554,7 @@
                alert("Choose only one category when you select video/magazine");
                $(".drpCategory").select2("val","0");
                $(".cls_coverimg_pdf").show();
-               $("#lblcovertitle").text("Enter Cover Title");
+               $("#lblcovertitle").text("Enter Product Name");
             }  else {
                $(".cls_coverimg_pdf").hide();
                $("#lblcovertitle").text("Video Link");
@@ -561,7 +562,7 @@
             }
          } else {
             $(".cls_coverimg_pdf").show();
-            $("#lblcovertitle").text("Enter Cover Title");
+            $("#lblcovertitle").text("Enter Product Name");
          }
       }
    });

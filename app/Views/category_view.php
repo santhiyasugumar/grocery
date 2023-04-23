@@ -1,12 +1,16 @@
 
 <?php 
    session_start();
-   if($_SESSION['role'] != "admin") {
-      require("login.php");
-   }
-   require("header.php");
-   require("leftmenu.php");
-   require("topmenu.php");
+   if(isset($_SESSION['role']) && $_SESSION['role'] == "admin") {require("header.php");
+      require("leftmenu.php");
+      require("topmenu.php");
+      // user is an admin, do something here
+    } else {
+      // user is not an admin, redirect to login page
+      header("Location: login");
+      exit();
+    }
+   
 ?>
 <!-- Breadcrumb-->
 
@@ -172,7 +176,7 @@
   {
     e.preventDefault(); // avoid to execute the actual submit of the form.
    //  if($("#form_save").validate().form()){
-        path = '<?php echo base_url('/Category/save')?>'; 
+        path = '<?php echo base_url('/category/save')?>'; 
         var form = $('#form_save');
         var formData = new FormData(form[0]);
         $.ajax({
@@ -207,7 +211,7 @@
   {
     e.preventDefault(); // avoid to execute the actual submit of the form.
    //  if($("#form_update").validate().form()){
-        path = '<?php echo base_url('/Category/update')?>'; 
+        path = '<?php echo base_url('/category/update')?>'; 
         var form = $('#form_update');
         var formData = new FormData(form[0]);
         $.ajax({
@@ -247,7 +251,7 @@
   {
     e.preventDefault(); // avoid to execute the actual submit of the form.
    //  if($("#form_delete").validate().form()){
-        path = '<?php echo base_url('/Category/delete')?>'; 
+        path = '<?php echo base_url('/category/delete')?>'; 
         var form = $('#form_delete');
         var formData = new FormData(form[0]);
         $.ajax({
