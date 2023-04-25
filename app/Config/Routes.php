@@ -35,6 +35,11 @@ $routes->post('/getLoginDetails', 'Login::getLoginDetails');
 $routes->post('/category/getAllData', 'Category::getAllData');
 $routes->post('/category/save', 'Category::save');
 $routes->post('/category/update', 'Category::update');
+
+$routes->post('/subcategory/getAllData', 'Subcategory::getAllData');
+$routes->post('/subcategory/save', 'Subcategory::save');
+$routes->post('/subcategory/update', 'Subcategory::update');
+
 $routes->get('/product/getData_drp', 'Product::getData_drp');
 $routes->post('/product/getAllData', 'Product::getAllData');
 
@@ -45,6 +50,7 @@ $routes->resource('category');
 $routes->resource('order');
 $routes->resource('product');
 $routes->resource('homeG');
+$routes->resource('subcategory');
 
 
 

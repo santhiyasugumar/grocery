@@ -17,6 +17,7 @@
             <!-- <li id="menuCity"><a href="<?php echo base_url('/home')?>"> <i class="icon-grid"></i>Home</a></li>               
             <li id="menuNews"><a href="<?php echo base_url('/news')?>"> <i class="icon-form"></i>News</a></li> -->
             <li id="menuCategory"><a href="<?php echo base_url('/category')?>"> <i class="icon-grid"></i>Category</a></li>
+            <li id="menuSubCategory"><a href="<?php echo base_url('/subcategory')?>"> <i class="icon-grid"></i>Sub Category</a></li>
             <li id="menuCategory"><a href="<?php echo base_url('/product')?>"> <i class="icon-grid"></i>Product</a></li>
             <!-- <li id="menuMagazine"><a href="<?php echo base_url('/magazine')?>"> <i class="icon-grid"></i>Magazine</a></li> -->
           </ul>
