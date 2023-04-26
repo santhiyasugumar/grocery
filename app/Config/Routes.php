@@ -39,9 +39,12 @@ $routes->post('/category/update', 'Category::update');
 $routes->post('/subcategory/getAllData', 'Subcategory::getAllData');
 $routes->post('/subcategory/save', 'Subcategory::save');
 $routes->post('/subcategory/update', 'Subcategory::update');
+$routes->post('/subcategory/getSubCategoryById', 'Subcategory::getSubCategoryById');
+
 
 $routes->get('/product/getData_drp', 'Product::getData_drp');
 $routes->post('/product/getAllData', 'Product::getAllData');
+$routes->post('/product/save', 'Product::save');
 
 $routes->resource('amirthamcinema');
 $routes->resource('login');
