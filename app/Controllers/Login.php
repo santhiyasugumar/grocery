@@ -9,6 +9,8 @@ class Login extends Controller {
     use ResponseTrait;
 
     public function index() {
+        session_start();
+        session_destroy();
         echo view('login_view');
     }
 

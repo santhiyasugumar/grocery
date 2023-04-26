@@ -25,7 +25,7 @@
                         <h4>Sub Category Details</h4>
                      </div>
                      <div class="col-md-6 text-right">
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal">Add Category</button>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal">Add Sub Category</button>
                      </div>
                   </div>
                </div>
@@ -57,7 +57,7 @@
                      <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Add Sub Category</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                               </button>

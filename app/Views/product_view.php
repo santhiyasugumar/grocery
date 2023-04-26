@@ -64,6 +64,26 @@
                                        </select>
                                     </div>
                                  </div>
+                              </div>
+                              <div class="row" style="display:none" id="subcat_container_row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Enter Sub Category</label>
+                                       <select name="drpSubCategory[]" class="form-control drpSubCategory" multiple>
+                                          <option></option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label id="lblproduct_name">Enter Product Name</label>
+                                       <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter Product Name" ></input>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
                                  <div class="col-md-6 cls_coverimg_pdf">
                                     <div class="form-group">
                                        <label>Cover Image/PDF</label>
@@ -71,16 +91,9 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                       <label id="lblcovertitle">Enter Product Name</label>
-                                       <textarea class="form-control" id="covertitle" name="covertitle" placeholder="Enter Product Name/Video Link" ></textarea>
-                                    </div>
-                                 </div>
-                              </div>
+                             
                               <div class="row d-none">
-                                 <div class="col-md-12">
+                                 <div class="col-md-6">
                                     <div class="form-group">
                                        <label>Enter Content</label>
                                        <textarea class="form-control" placeholder="Enter Content" id="content" name="content"></textarea>
@@ -91,20 +104,15 @@
                                  <div class="col-md-3">
                                     <div class="form-check form-check-inline">
                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="public" checked>
-                                       <label class="form-check-label" for="inlineRadio1">Public</label>
+                                       <label class="form-check-label" for="inlineRadio1">Enable</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="private">
-                                       <label class="form-check-label" for="inlineRadio2">Private</label>
+                                       <label class="form-check-label" for="inlineRadio2">Disable</label>
                                     </div>
                                  </div>
-                                 <!-- <div class="col-md-3">
-                                    <div class="form-group">
-                                       <label for="exampleInputEmail1">Establish Date</label>
-                                       <input type="text" class="form-control form-control-sm  datetimepicker-input" id="txtDateOfSample" data-toggle="datetimepicker" data-target="#txtDateOfSample" placeholder="DD/MM/YYYY HH:MM" tabindex="3" name="txtDateOfSample" /> 
-                                       <small id="emailHelp" class="form-text text-muted">Date Format: DD/MM/YYYY HH:MM</small>
-                                    </div>
-                                 </div> -->
+                              </div>
+                              <div class="row">
                                  <div class="col-md-6 text-right">
                                     <button type="button" class="btn btn-secondary"  id="reset" data-dismiss="modal">Reset</button>
                                     <button type="submit" class="btn btn-primary" id="btnsave">Save</button>
@@ -172,7 +180,7 @@
                data: drp_data['DATA_CATEGORY'],
                placeholder: "Select Category",
                width: '100%',
-               maximumSelectionLength: 20,
+               maximumSelectionLength: 1,
             });  
    
             hidePreloader();
@@ -210,7 +218,7 @@
    
    function clearData() {
       // $(".drpCategory").select2("val","0");
-      $("#covertitle").val('');
+      $("#product_name").val('');
       newscontent.setData('');
       $('#file').val('');
       $('#txtDateOfSample').val('');
@@ -218,101 +226,92 @@
    
    $("#btnsave").click(function(e)  
    {
-   e.preventDefault(); // avoid to execute the actual submit of the form.
-   if($(".drpCategory").val().length == 0){
-      alert("Kindly Choose the Category");
-      return;
-   }
-   
-   if($('#file').val().length > 0) {
-      var file_size = $('#file')[0].files[0].size;
-      if(file_size == 0) {
-         alert("Kindly select the file(image)");
+      e.preventDefault(); // avoid to execute the actual submit of the form.
+      if($(".drpCategory").val().length == 0){
+         alert("Kindly Choose the Category");
          return;
       }
-
-      var ext = $('#file').val().split('.').pop().toLowerCase();
-      // 7 - magazine, 8 - video
-      if(!$(".drpCategory").val().includes('8') && !$(".drpCategory").val().includes('7')) { 
-         if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
-            alert('Kindly Browse the Cover Image(.png, .jpg)');
+      
+      if($('#file').val().length > 0) {
+         var file_size = $('#file')[0].files[0].size;
+         if(file_size == 0) {
+            alert("Kindly select the file(image)");
             return;
          }
-         var file_size = $('#file')[0].files[0].size;
-         if(file_size>4194304) { //4mb
-            alert("Kindly choose the file below 4MB");
+
+         var ext = $('#file').val().split('.').pop().toLowerCase();
+         // 7 - magazine, 8 - video
+         if(!$(".drpCategory").val().includes('8') && !$(".drpCategory").val().includes('7')) { 
+            if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+               alert('Kindly Browse the Cover Image(.png, .jpg)');
+               return;
+            }
+            var file_size = $('#file')[0].files[0].size;
+            if(file_size>4194304) { //4mb
+               alert("Kindly choose the file below 4MB");
+               return;
+            }
+         }
+         
+         // if($(".drpCategory").val().includes('7')) { // 7 - magazine(pdf)
+         //    // if($.inArray(ext, ['pdf']) == -1) {
+         //    //    alert('Kindly select the pdf');
+         //    //    return;
+         //    // }
+         //    var file_size = $('#file')[0].files[0].size;
+         //    if(file_size>4194304) { //4mb
+         //       alert("Kindly choose the file below 4MB");
+         //       return;
+         //    }
+         // }
+      } else {
+         if(!$(".drpCategory").val().includes('8')) {
+            alert("Kindly fill the image");
             return;
          }
       }
       
-      if($(".drpCategory").val().includes('7')) { // 7 - magazine(pdf)
-         if($.inArray(ext, ['pdf']) == -1) {
-            alert('Kindly select the pdf');
-            return;
-         }
-         var file_size = $('#file')[0].files[0].size;
-         if(file_size>4194304) { //4mb
-            alert("Kindly choose the file below 4MB");
-            return;
-         }
-      }
-   } else {
-      if(!$(".drpCategory").val().includes('8')) {
-         alert("Kindly fill the image");
+      if(!$("#product_name").val()){
+         alert("Kindly fill the Title/Video Link");
          return;
       }
-   }
-   
-   if(!$("#covertitle").val()){
-      alert("Kindly fill the Title/Video Link");
-      return;
-   }
-   if(newscontent.getData().length==0){
-      alert("Kindly fill the Content");
-      return;
-   }
+      // if(newscontent.getData().length==0){
+      //    alert("Kindly fill the Content");
+      //    return;
+      // }
 
-   if(!$("#txtDateOfSample").val()){
-      alert("Kindly fill the Establish Date");
-      return;
-   }
+      // if(!$("#txtDateOfSample").val()){
+      //    alert("Kindly fill the Establish Date");
+      //    return;
+      // }
 
-     
-   path = '<?php echo base_url('/News/save')?>';
-   var form = $('#form_save');
-   var formData = new FormData(form[0]);
+      
+      path = '<?php echo base_url('/product/save')?>';
+      var form = $('#form_save');
+      var formData = new FormData(form[0]);
    
-   var date_time = $("#txtDateOfSample").val().split(" ");
-   var time = date_time[1]+" "+date_time[2];
-   var time = moment(time, ["h:mm A"]).format("HH:mm");
-   
-   var date = date_time[0].split("/");
-   var date = date[2]+"-"+date[1]+"-"+date[0];
-   
-   formData.append("established_date", (date+" "+time+":00"));
-   formData.append("content", newscontent.getData());
-   $.ajax({
-      type: "POST",
-      url: path,
-      data: formData,
-      contentType: false,
-      processData: false,
-      beforeSend: function() {
-        showPreloader();
-      },
-     
-      success: function(data)
-      { 
-      if(data.messages.success == "Data Saved") {
-         alert("Data Inserted Successfully");
-         location.reload();
-         hidePreloader();
-      } 
-      },
-      error: function (jqXHR, textStatus, errorMessage, exception) {
-      console.log(errorMessage);
-      }
-   });
+      $.ajax({
+         type: "POST",
+         url: path,
+         data: formData,
+         contentType: false,
+         processData: false,
+         beforeSend: function() {
+         showPreloader();
+         },
+      
+         success: function(data)
+         { 
+         if(data.messages.success == "Data Saved") {
+            alert("Data Inserted Successfully");
+            location.reload();
+            hidePreloader();
+         } 
+         },
+         error: function (jqXHR, textStatus, errorMessage, exception) {
+         console.log(errorMessage);
+         }
+      });
    });
    
    $("#btnupdate").click(function(e) {
@@ -359,20 +358,20 @@
          formData.append("is_img", 0);
       }
    
-      if(!$("#covertitle").val()){
+      if(!$("#product_name").val()){
          alert("Kindly fill the Title");
          return;
       }
      
-      if(newscontent.getData().length==0){
-         alert("Kindly fill the Content");
-         return;
-      }
+      // if(newscontent.getData().length==0){
+      //    alert("Kindly fill the Content");
+      //    return;
+      // }
     
-      if(!$("#txtDateOfSample").val()){
-         alert("Kindly fill the Establish Date");
-         return;
-      }
+      // if(!$("#txtDateOfSample").val()){
+      //    alert("Kindly fill the Establish Date");
+      //    return;
+      // }
 
         path = '<?php echo base_url('/News/update')?>';  
        
@@ -505,12 +504,11 @@
    
    window.btnActionEvent = {
       'click .btnedit': function (e, value, row, index) {
-        
          clearData();
          var category_arr = row['category_id_group'].split(",");
          $('.tableContainer').hide();   
          $('.newsEnrollContainer').show();   
-         $('#covertitle').val(row['cover_title']);
+         $('#product_name').val(row['cover_title']);
          $('.drpCategory').val(category_arr).trigger('change.select2');
          newscontent.setData(row['content']);
          var dt_details = row['established_date'].split(" ");
@@ -547,23 +545,59 @@
       }
    });
    
-   $(".drpCategory").change(function() {
-      if($(".drpCategory").val() != []) {
-         if($(".drpCategory").val().includes("8")) {
-            if($(".drpCategory").val().length > 1) {
-               alert("Choose only one category when you select video/magazine");
-               $(".drpCategory").select2("val","0");
-               $(".cls_coverimg_pdf").show();
-               $("#lblcovertitle").text("Enter Product Name");
-            }  else {
-               $(".cls_coverimg_pdf").hide();
-               $("#lblcovertitle").text("Video Link");
-               $("#covertitle").attr('placeholder', 'Enter Video Link');
+   // $(".drpCategory").change(function() {
+   //    if($(".drpCategory").val() != []) {
+   //       if($(".drpCategory").val().includes("8")) {
+   //          if($(".drpCategory").val().length > 1) {
+   //             alert("Choose only one category when you select video/magazine");
+   //             $(".drpCategory").select2("val","0");
+   //             $(".cls_coverimg_pdf").show();
+   //             $("#lblproduct_name").text("Enter Product Name");
+   //          }  else {
+   //             $(".cls_coverimg_pdf").hide();
+   //             $("#lblproduct_name").text("Video Link");
+   //             $("#product_name").attr('placeholder', 'Enter Video Link');
+   //          }
+   //       } else {
+   //          $(".cls_coverimg_pdf").show();
+   //          $("#lblproduct_name").text("Enter Product Name");
+   //       }
+   //    }
+   // });
+
+   $(".drpCategory").change(function(e) {
+      e.preventDefault();
+      if($(".drpCategory").val().length > 0) {
+         var form = $('#form_save');
+         var formData = new FormData(form[0]);
+         path = '<?php echo base_url('/subcategory/getSubCategoryById')?>'; 
+         $.ajax({
+            type: "POST",
+            url: path,
+            data: formData,
+            beforeSend: function() {
+               showPreloader();
+               $('#deleteModal').modal('hide');
+            },
+            contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+            processData: false, // NEEDED, DON'T OMIT THIS
+            success: function(data)
+            {
+               var drp_data = JSON.parse(data);  
+               console.log(drp_data);
+               $(".drpSubCategory").select2({
+                  data: drp_data['DATA_SUBCATEGORY'],
+                  placeholder: "Select Sub Category",
+                  width: '100%',
+                  maximumSelectionLength: 1,
+               });  
+               $("#subcat_container_row").show();
+               hidePreloader();
+            },
+            error: function (jqXHR, textStatus, errorMessage, exception) {
+               console.log(errorMessage);
             }
-         } else {
-            $(".cls_coverimg_pdf").show();
-            $("#lblcovertitle").text("Enter Product Name");
-         }
+         });
       }
    });
 </script>

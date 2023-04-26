@@ -65,7 +65,7 @@
                   </ul>
                 </li> -->
                 <!-- Log out-->
-                <li class="nav-item"><a href="<?php echo base_url('/Login')?>" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="<?php echo base_url('/login')?>" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>

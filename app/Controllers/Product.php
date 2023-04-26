@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Models\News_model;
+use App\Models\Product_model;
 use App\Models\City_model;
 use App\Models\Category_model;
 use App\Models\Class_section_model;
@@ -19,7 +19,7 @@ class Product extends Controller {
         helper(['form', 'url']);
       
         $db = \Config\Database::connect();
-        $model=new News_model();
+        $model=new Product_model();
         $model_category = new Category_model();
 
         $paginationData = file_get_contents('php://input');
@@ -61,10 +61,12 @@ class Product extends Controller {
         $db = \Config\Database::connect();
         $db->transBegin();
         helper(['form', 'url']);
-        $model=new News_model();
+        $model=new Product_model();
  
         $msg = 'Please select a valid file';
         $cat_arr =  $this->request->getVar('drpCategory');
+        $sub_cat_arr =  $this->request->getVar('drpSubCategory');
+        
         $avatar = $this->request->getFile('file');
         if($this->request->getVar('inlineRadioOptions') == "public") {
             $status = 'true';
@@ -72,40 +74,36 @@ class Product extends Controller {
             $status = 'false';
         }
        
-        for($i = 0; $i<sizeof($cat_arr); $i++) {
-            if($cat_arr[$i] == 8) {
-                $img = "";
-                $type = "";
-            } else {
-                $type = $avatar->getClientMimeType();
-                $img=  $avatar->getClientName();
-            }
+        // for($i = 0; $i<sizeof($cat_arr); $i++) {
+            $type = $avatar->getClientMimeType();
+            $img=  $avatar->getClientName();
             $data = [
-                'content' => $this->request->getVar('content'),
-                'cover_image_name' => $img,
-                'cover_image_type'  => $type,
-                'category_id' => $cat_arr[$i],
-                'cover_title' => trim($this->request->getVar('covertitle')),
+                'product_name' => $this->request->getVar('product_name'),
+                'product_image_name' => $img,
+                'product_image_type'  => $type,
+                'category_id' => '7',
+                'subcategory_id' => '4',
                 'status' => $status,
                 'created_on'=> date("Y-m-d h:i:s"),
                 'created_by'=> '1',
                 'updated_on'=> date("Y-m-d h:i:s"),
                 'updated_by'=> '1',
-                'established_date'=> $this->request->getVar('established_date'),
             ];
+
+            // return json_encode($data);
             $last_id = $model->insert($data);
            
-            if($i==0 && ($cat_arr[$i] != 8)) {
-                $grpid = $last_id;
-                $path = "uploads/". $last_id;
-                mkdir($path);
-                $avatar->move($path);
-            }
-            $data = [
-                'grpid' => $grpid
-            ];
-            $model->update($last_id, $data);
-        }
+            // if($i==0 && ($cat_arr[$i] != 8)) {
+            //     $grpid = $last_id;
+            //     $path = "uploads/". $last_id;
+            //     mkdir($path);
+            //     $avatar->move($path);
+            // }
+            // $data = [
+            //     'grpid' => $grpid
+            // ];
+            // $model->update($last_id, $data);
+        // }
         $msg = 'Data Saved';
 
         $response = [
@@ -133,7 +131,7 @@ class Product extends Controller {
         $db = \Config\Database::connect();
         $db->transBegin();
         helper(['form', 'url']);
-        $model=new News_model();
+        $model=new Product_model();
         
         $avatar = $this->request->getFile('file');
         $grpid = $this->request->getVar('txtid');  
@@ -235,7 +233,7 @@ class Product extends Controller {
      {
         $db = \Config\Database::connect();
         $db->transBegin();
-        $model = new News_model();
+        $model = new Product_model();
         $grpid = $this->request->getVar('txtid_delete');
 
         $builder=$model->db->table("news as cs");

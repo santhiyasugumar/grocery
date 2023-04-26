@@ -2,6 +2,7 @@
 
 use CodeIgniter\Controller;
 use App\Models\Subcategory_model;
+use App\Models\Category_model;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 class Subcategory extends Controller {
@@ -87,6 +88,30 @@ class Subcategory extends Controller {
                 'success' => 'Data Deleted'
             ]
         ];
+        return $this->respondCreated($response);
+     }
+
+     public function getSubCategoryById() {
+        $db = \Config\Database::connect();
+        $model = new Category_model();
+        
+        $category_id = $this->request->getVar('drpCategory')[0];
+        $query = "SELECT id, subcategoryname from subcategory where category_id = $category_id";
+        $query = $db->query($query);
+        $val = $query->getResultArray(); 
+
+        $data_category = array();
+        $row =  array();
+        foreach($val as $user){
+            $row["id"] =$user['id'];
+            $row["text"] = $user['subcategoryname'];
+            array_push($data_category, $row);
+        }
+
+        $response  = json_encode(array(
+            "DATA_SUBCATEGORY" => $data_category,
+        ));
+        
         return $this->respondCreated($response);
      }
 
