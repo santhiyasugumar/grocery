@@ -27,33 +27,26 @@ class Product extends Controller {
         $limit = $paginationJson['limit'];
         $offset = $paginationJson['offset'];
         $search = $paginationJson['search'];
-        $sea = "";
-        if(!isset($search)) {
-            $sea = "AND (news.cover_title LIKE '%$search%') OR (cat.category_name LIKE '%$search%')";
+        $search_query = "";
+        if(isset($search)) {
+            $search_query = "WHERE (b.category_name LIKE '%$search%') OR (a.product_name LIKE '%$search%')";
         }
 
-        $sql = "SELECT news.*,GROUP_CONCAT(news.category_id) as category_id_group,cat.category_name as category_name,GROUP_CONCAT(cat.category_name) as category_name, DATE_FORMAT(news.created_on, '%d/%m/%Y') as created_on FROM news AS news 
-        LEFT JOIN category AS cat ON cat.category_id = news.category_id
-        WHERE 
-        news.established_date <= NOW() $sea 
-        GROUP BY news.grpid ORDER BY news.created_on DESC";
-        echo ($sql);
-        exit;
+        $sql = "SELECT * FROM product";
         $query = $db->query($sql);
         $count = $query->getResultArray(); 
        
-        $sql = "SELECT news.*,GROUP_CONCAT(news.category_id) as category_id_group,cat.category_name as category_name,GROUP_CONCAT(cat.category_name) as category_name, DATE_FORMAT(news.created_on, '%d/%m/%Y') as created_on FROM news AS news 
-        LEFT JOIN category AS cat ON cat.category_id = news.category_id
-        WHERE 
-        news.established_date <= NOW() $sea 
-        GROUP BY news.grpid ORDER BY news.created_on DESC LIMIT $limit OFFSET $offset";
+        $sql = "SELECT a.*, b.category_name FROM product a left join category b on a.category_id = b.category_id 
+                $search_query
+                ORDER BY created_on DESC LIMIT $limit OFFSET $offset";
         $query = $db->query($sql);
         $data = $query->getResultArray(); 
        
         echo json_encode(array(
             "name" => "result",
             "total" => (int)count($count),
-            "rows" => $data
+            "rows" => $data,
+            "query" => $sql,
         ));
     }
 
@@ -81,8 +74,8 @@ class Product extends Controller {
                 'product_name' => $this->request->getVar('product_name'),
                 'product_image_name' => $img,
                 'product_image_type'  => $type,
-                'category_id' => '7',
-                'subcategory_id' => '4',
+                'category_id' => $cat_arr,
+                'subcategory_id' => $sub_cat_arr,
                 'status' => $status,
                 'created_on'=> date("Y-m-d h:i:s"),
                 'created_by'=> '1',
@@ -94,10 +87,10 @@ class Product extends Controller {
             $last_id = $model->insert($data);
            
             // if($i==0 && ($cat_arr[$i] != 8)) {
-            //     $grpid = $last_id;
-            //     $path = "uploads/". $last_id;
-            //     mkdir($path);
-            //     $avatar->move($path);
+                $grpid = $last_id;
+                $path = "uploads/". $last_id;
+                mkdir($path);
+                $avatar->move($path);
             // }
             // $data = [
             //     'grpid' => $grpid
@@ -154,62 +147,39 @@ class Product extends Controller {
         }
         $cat_arr =  $this->request->getVar('drpCategory');
 
-        // if ($validated) {
-            for($i = 0; $i<sizeof($cat_arr); $i++) {
-                if($cat_arr[$i] == 8) {
-                    $img = "";
-                    $type = "";
-                }  else if($is_img == 1){
-                    $type = $avatar->getClientMimeType();
-                    $img=  $avatar->getClientName();
-                }
-              
-                $data = [
-                    'content' => $this->request->getVar('content'),
-                    'cover_image_name' => $img,
-                    'cover_image_type'  => $type,
-                    'category_id' => $cat_arr[$i],
-                    'cover_title' => trim($this->request->getVar('covertitle')),
-                    'status' => $status,
-                    'created_on'=> date("Y-m-d h:i:s"),
-                    'created_by'=> '1',
-                    'updated_on'=> date("Y-m-d h:i:s"),
-                    'updated_by'=> '1',
-                    'grpid' => $grpid,
-                    'established_date'=> $this->request->getVar('established_date'),
-                ];
-    
-                $last_id = $model->insert($data);
-             
-                if(($i==0) && ($cat_arr[$i] != 8) && ($is_img != 0)) {
-                    $path = "uploads/". $grpid;
-                    $avatar->move($path);
-                }
-                $model->update($last_id, $data);
+        for($i = 0; $i<sizeof($cat_arr); $i++) {
+            if($cat_arr[$i] == 8) {
+                $img = "";
+                $type = "";
+            }  else if($is_img == 1){
+                $type = $avatar->getClientMimeType();
+                $img=  $avatar->getClientName();
             }
-            $msg = 'Data Updated';
-        // } else {
-        //     for($i = 0; $i<sizeof($cat_arr); $i++) {
-        //         $data = [
-        //             'content' => $this->request->getVar('content'),
-        //             'category_id' => $cat_arr[$i],
-        //             'cover_title' => trim($this->request->getVar('covertitle')),
-        //             'status' => $status,
-        //             'created_on'=> date("Y-m-d h:i:sa"),
-        //             'created_by'=> '1',
-        //             'updated_on'=> date("Y-m-d h:i:sa"),
-        //             'updated_by'=> '1',
-        //             'grpid' => $grpid,
-        //             'cover_image_name' =>  $imgname,
-        //             'cover_image_type'  => $imgtype,
-        //             'established_date'=> $this->request->getVar('established_date'),
-        //         ];
+            
+            $data = [
+                'content' => $this->request->getVar('content'),
+                'cover_image_name' => $img,
+                'cover_image_type'  => $type,
+                'category_id' => $cat_arr[$i],
+                'cover_title' => trim($this->request->getVar('covertitle')),
+                'status' => $status,
+                'created_on'=> date("Y-m-d h:i:s"),
+                'created_by'=> '1',
+                'updated_on'=> date("Y-m-d h:i:s"),
+                'updated_by'=> '1',
+                'grpid' => $grpid,
+                'established_date'=> $this->request->getVar('established_date'),
+            ];
 
-        //         $last_id = $model->insert($data);
-        //     }
-        //     $msg = 'Data Updated';
-        // }
-
+            $last_id = $model->insert($data);
+            
+            if(($i==0) && ($cat_arr[$i] != 8) && ($is_img != 0)) {
+                $path = "uploads/". $grpid;
+                $avatar->move($path);
+            }
+            $model->update($last_id, $data);
+        }
+        $msg = 'Data Updated';
         $response = [
             'status'   => 201,
             'error'    => null,

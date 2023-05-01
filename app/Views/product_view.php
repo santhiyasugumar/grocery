@@ -43,7 +43,7 @@
                               <th data-field="grpid" data-visible="false">grpID</th>
                               <th data-field="created_on" data-sortable="true">Created on</th>
                               <th data-field="category_name" data-sortable="true"  data-width="100px">Category Name</th>
-                              <th data-field="cover_title" data-sortable="true" data-width="400px">Product Name</th>
+                              <th data-field="product_name" data-sortable="true" data-width="400px">Product Name</th>
                               <th data-field="status" data-visible="false">status</th>
                               <th class="action-table" data-field="action" data-align="center" data-formatter="btnAction" data-events="btnActionEvent">Action</th>
                            </tr>

@@ -46,14 +46,24 @@ $routes->get('/product/getData_drp', 'Product::getData_drp');
 $routes->post('/product/getAllData', 'Product::getAllData');
 $routes->post('/product/save', 'Product::save');
 
+$routes->get('/menu/getAllMenu', 'Menu::megaMenu');
+$routes->get('/plp/(:any)/sc/(:any)', 'Plp::index');
+$routes->post('/getProductBasedonCategoryId', 'Plp::getProductBasedonCategoryId');
+
+
+
+// $routes->get('/demo/action3/(:any)', 'Demo::index3/$1');
+
 $routes->resource('amirthamcinema');
 $routes->resource('login');
 $routes->resource('news');
 $routes->resource('category');
 $routes->resource('order');
 $routes->resource('product');
-$routes->resource('homeG');
+$routes->resource('home');
 $routes->resource('subcategory');
+$routes->resource('plp');
+$routes->resource('menu');
 
 
 

@@ -9,7 +9,7 @@ class Home extends Controller {
     use ResponseTrait;
 
     public function index() {
-        echo view('home_view');
+        return view('home_view');
     }
 
     public function getAllData() {
