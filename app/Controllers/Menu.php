@@ -30,7 +30,7 @@ class Menu extends Controller {
                         '. $result_parent[$i]['category_name'] .'</a>
                         <ul class="dropdown-menu dropdown-menu-dark">';
             for($j=0; $j<count($result); $j++) {
-                $menu .= '<li><a class="dropdown-item" href="'.base_url().'plp/10/sc/'. $result[$j]['id'] .'">'. $result[$j]['subcategoryname'] .'</a></li>';
+                $menu .= '<li><a class="dropdown-item" href="'.base_url().'plp/sc/'. $result[$j]['id'] .'">'. $result[$j]['subcategoryname'] .'</a></li>';
                 
             }
             $menu .= '</ul></li>';

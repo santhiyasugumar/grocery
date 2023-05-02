@@ -22,19 +22,21 @@ class Plp extends Controller {
        
         $category_id = $data['category_id'];
         $category_type = $data['category_type'];
-        $limit = $data['limit'];
+        $offset = $data['offset'];
       
         if($category_type == "sc") {
-            $getfrom = "subcategory_id = $category_id ";
+            $getfrom = "where subcategory_id = $category_id ";
         } else if($category_type == "c") {
-            $getfrom = "category_id = $category_id ";
+            $getfrom = "where category_id = $category_id";
         }
 
         if(!empty($txtsearch)) {
-            $getfrom .= "AND product_name like '%$txtsearch%' ";
+            $getfrom .= "AND product_name like '%$txtsearch%'  ";
+        } else  {
+            $getfrom .=  "limit 10 offset $offset";
         }
 
-        $query_str = "SELECT * from product where $getfrom limit $limit";
+        $query_str = "SELECT * from product $getfrom";
         $query = $db->query($query_str);
         $val = $query->getResultArray(); 
         

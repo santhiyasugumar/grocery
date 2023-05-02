@@ -47,7 +47,7 @@ $routes->post('/product/getAllData', 'Product::getAllData');
 $routes->post('/product/save', 'Product::save');
 
 $routes->get('/menu/getAllMenu', 'Menu::megaMenu');
-$routes->get('/plp/(:any)/sc/(:any)', 'Plp::index');
+$routes->get('/plp/sc/(:any)', 'Plp::index');
 $routes->post('/getProductBasedonCategoryId', 'Plp::getProductBasedonCategoryId');
 
 
