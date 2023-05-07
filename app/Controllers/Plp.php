@@ -9,7 +9,7 @@ class Plp extends Controller {
     use ResponseTrait;
 
     public function index() {
-        return view('plp_view');
+        return view('plp_final_view');
     }
 
     public function getProductBasedonCategoryId()
@@ -42,7 +42,8 @@ class Plp extends Controller {
         
         $val = array(
             "name" => "result",
-            "rows" => $val
+            "rows" => $val,
+            "query" => $query_str
         );
 
 		return json_encode($val);

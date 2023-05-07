@@ -51,23 +51,23 @@ class Product extends Controller {
     }
 
     public function save() {
-        $db = \Config\Database::connect();
-        $db->transBegin();
-        helper(['form', 'url']);
-        $model=new Product_model();
- 
-        $msg = 'Please select a valid file';
-        $cat_arr =  $this->request->getVar('drpCategory');
-        $sub_cat_arr =  $this->request->getVar('drpSubCategory');
+        try {
+            $db = \Config\Database::connect();
+            $db->transBegin();
+            helper(['form', 'url']);
+            $model=new Product_model();
+    
+            $msg = 'Please select a valid file';
+            $cat_arr =  $this->request->getVar('drpCategory');
+            $sub_cat_arr =  $this->request->getVar('drpSubCategory');
+            
+            $avatar = $this->request->getFile('file');
+            if($this->request->getVar('inlineRadioOptions') == "public") {
+                $status = 'true';
+            } else if($this->request->getVar('inlineRadioOptions') == "private") {
+                $status = 'false';
+            }
         
-        $avatar = $this->request->getFile('file');
-        if($this->request->getVar('inlineRadioOptions') == "public") {
-            $status = 'true';
-        } else if($this->request->getVar('inlineRadioOptions') == "private") {
-            $status = 'false';
-        }
-       
-        // for($i = 0; $i<sizeof($cat_arr); $i++) {
             $type = $avatar->getClientMimeType();
             $img=  $avatar->getClientName();
             $data = [
@@ -81,31 +81,27 @@ class Product extends Controller {
                 'created_by'=> '1',
                 'updated_on'=> date("Y-m-d h:i:s"),
                 'updated_by'=> '1',
+                'price' => $this->request->getVar('price'),
             ];
 
-            // return json_encode($data);
             $last_id = $model->insert($data);
-           
-            // if($i==0 && ($cat_arr[$i] != 8)) {
-                $grpid = $last_id;
-                $path = "uploads/". $last_id;
-                mkdir($path);
-                $avatar->move($path);
-            // }
-            // $data = [
-            //     'grpid' => $grpid
-            // ];
-            // $model->update($last_id, $data);
-        // }
-        $msg = 'Data Saved';
+            
+            $path = "uploads/". $last_id;
+            mkdir($path);
+            $avatar->move($path);
+                
+            $msg = 'Data Saved';
 
-        $response = [
-            'status'   => 201,
-            'error'    => null,
-            'messages' => [
-                'success' => $msg
-            ]
-        ];
+            $response = [
+                'status'   => 201,
+                'error'    => null,
+                'messages' => [
+                    'success' => $msg
+                ]
+            ]; 
+        } catch (\Exception $e) {
+            exit($e->getMessage());
+        }
 
         if ($db->transStatus() === FALSE)
         {

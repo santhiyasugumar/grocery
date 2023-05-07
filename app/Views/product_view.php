@@ -113,6 +113,14 @@
                                  </div>
                               </div>
                               <div class="row">
+                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                       <label>Price</label>
+                                       <input type="number" class="form-control" placeholder="Enter Price" id="price" name="price"/>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
                                  <div class="col-md-6 text-right">
                                     <button type="button" class="btn btn-secondary"  id="reset" data-dismiss="modal">Reset</button>
                                     <button type="submit" class="btn btn-primary" id="btnsave">Save</button>

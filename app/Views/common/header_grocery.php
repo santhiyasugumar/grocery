@@ -50,7 +50,7 @@
               <div class="container-fluid">
                 <a class="navbar-brand" href="#">Grocery</a>
                 <div>
-                <i class="fa" style="font-size:24px">&#xf07a;</i>
+                  <i class="fa" style="font-size:24px">&#xf07a;</i>
                   <span class='badge badge-warning' id='lblCartCount'> 0 </span>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
